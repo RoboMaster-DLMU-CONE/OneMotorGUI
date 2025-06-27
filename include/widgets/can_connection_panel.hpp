@@ -2,7 +2,8 @@
 #define CAN_CONNECTION_PANEL_HPP
 
 #include <gtkmm.h>
-#include <memory>
+#include <vector>
+#include <string>
 
 namespace OneMotorGUI
 {
@@ -16,12 +17,14 @@ namespace OneMotorGUI
 
         // 公共方法
         bool is_connected() const { return m_connected; }
-        std::string get_interface() const { return m_interface_entry.get_text(); }
+        std::string get_interface() const;
 
     private:
         void setupUI();
         void onConnectButtonClicked();
         void updateConnectionStatus(bool connected, const std::string &message = "");
+        void populateCanInterfaces();
+        static std::vector<std::string> findCanInterfaces();
 
         // UI组件
         Gtk::Frame m_frame;
@@ -31,7 +34,7 @@ namespace OneMotorGUI
         Gtk::Box m_status_box;
 
         Gtk::Label m_interface_label;
-        Gtk::Entry m_interface_entry;
+        Gtk::ComboBoxText m_interface_combo;
 
         Gtk::Button m_connect_button;
 

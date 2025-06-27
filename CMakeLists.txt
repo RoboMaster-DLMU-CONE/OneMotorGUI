@@ -19,6 +19,7 @@ else ()
 endif ()
 
 include(FindGTKMM)
+include(FindLibnl3)
 
 set(CMAKE_CXX_STANDARD 23)
 
@@ -26,5 +27,5 @@ file(GLOB_RECURSE SOURCE_FILES "src/*.cpp")
 
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-target_include_directories(${PROJECT_NAME} PUBLIC include)
-target_link_libraries(${PROJECT_NAME} PUBLIC ${GTKMM_LIBRARIES} OneMotor::OneMotor)
+target_include_directories(${PROJECT_NAME} PUBLIC include ${LIBNL3_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${GTKMM_LIBRARIES} ${LIBNL3_LIBRARIES} OneMotor::OneMotor)
